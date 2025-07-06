@@ -8,10 +8,18 @@
     <div class="container">
         <h1>Check-in</h1>
         <form action="/transaction/checkin" method="post">
-            <label for="id">Customer ID</label>
-            <input type="text" id="id" name="id" required>
-            <label for="no">Room No.</label>
-            <input type="text" id="no" name="no" required>
+            <label for="id">Customer</label>
+            <select id="id" name="id" required>
+                {% for customer in customers %}
+                <option value="{{ customer[0] }}">{{ customer[0] }} - {{ customer[1] }}</option>
+                {% endfor %}
+            </select>
+            <label for="no">Available Room</label>
+            <select id="no" name="no" required>
+                {% for room in available_rooms %}
+                <option value="{{ room[0] }}">{{ room[0] }} ({{ room[1] }} - ${{ room[2] }})</option>
+                {% endfor %}
+            </select>
             <button type="submit">Check-in</button>
         </form>
         <form action="/transaction" method="get">

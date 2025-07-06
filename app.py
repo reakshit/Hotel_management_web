@@ -187,33 +187,57 @@ def new_customer():
         return redirect(url_for('customer'))
     return render_template('new_customer.html')
 
-@app.route('/customer/update', methods=['GET', 'POST'])
-def update_customer():
+@app.route('/customer/update')
+def select_customer_to_update():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
+    customers = cust.report_cust(conn)
+    conn.close()
+    return render_template('select_customer_to_update.html', customers=customers)
+
+@app.route('/customer/update/<cID>', methods=['GET', 'POST'])
+def update_customer(cID):
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
     if request.method == 'POST':
-        tID = request.form['tID']
-        cID = request.form['cID']
+        tID = cID # The original ID is passed as cID in the URL
+        new_cID = request.form['cID']
         name = request.form['name']
-        conn = get_db_connection()
-        cust.update_cust(conn, tID, cID, name)
+        cust.update_cust(conn, tID, new_cID, name)
         conn.close()
         return redirect(url_for('customer'))
-    return render_template('update_customer.html')
+    
+    # Fetch the specific customer's data to pre-fill the form
+    mycur = conn.cursor()
+    mycur.execute("SELECT * FROM CUSTOMERS WHERE CustomerID = '{}'".format(cID))
+    customer_data = mycur.fetchone()
+    mycur.close()
+    conn.close()
+
+    if customer_data:
+        return render_template('update_customer.html', customer=customer_data)
+    else:
+        return "Customer not found", 404
 
 @app.route('/customer/delete', methods=['GET', 'POST'])
 def delete_customer():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
     if request.method == 'POST':
         cID = request.form['cID']
-        conn = get_db_connection()
         cust.delete_cust(conn, cID)
         conn.close()
         return redirect(url_for('customer'))
-    return render_template('delete_customer.html')
+    
+    records = cust.report_cust(conn) # Reuse report_cust to get all customers
+    conn.close()
+    return render_template('delete_customer.html', customers=records)
 
 @app.route('/customer/report')
 def customer_report():
@@ -246,34 +270,58 @@ def new_room():
         return redirect(url_for('room_management'))
     return render_template('new_room.html')
 
-@app.route('/room/update', methods=['GET', 'POST'])
-def update_room():
+@app.route('/room/update')
+def select_room_to_update():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
+    rooms = room.report_room(conn)
+    conn.close()
+    return render_template('select_room_to_update.html', rooms=rooms)
+
+@app.route('/room/update/<roomno>', methods=['GET', 'POST'])
+def update_room(roomno):
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
     if request.method == 'POST':
-        uroom = request.form['uroom']
-        roomno = request.form['roomno']
+        uroom = roomno # The original roomno is passed in the URL
+        new_roomno = request.form['roomno']
         roontype = request.form['roontype']
         roompri = request.form['roompri']
-        conn = get_db_connection()
-        room.update_rooom(conn, uroom, roomno, roontype, roompri)
+        room.update_rooom(conn, uroom, new_roomno, roontype, roompri)
         conn.close()
         return redirect(url_for('room_management'))
-    return render_template('update_room.html')
+    
+    # Fetch the specific room's data to pre-fill the form
+    mycur = conn.cursor()
+    mycur.execute("SELECT * FROM ROOMS WHERE Roomno = '{}'".format(roomno))
+    room_data = mycur.fetchone()
+    mycur.close()
+    conn.close()
+
+    if room_data:
+        return render_template('update_room.html', room=room_data)
+    else:
+        return "Room not found", 404
 
 @app.route('/room/delete', methods=['GET', 'POST'])
 def delete_room():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
     if request.method == 'POST':
         roomno = request.form['roomno']
-        conn = get_db_connection()
         room.delete_room(conn, roomno)
         conn.close()
         return redirect(url_for('room_management'))
-    return render_template('delete_room.html')
+    
+    records = room.report_room(conn) # Reuse report_room to get all rooms
+    conn.close()
+    return render_template('delete_room.html', rooms=records)
 
 @app.route('/room/report')
 def room_report():
@@ -296,28 +344,50 @@ def checkin():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
     if request.method == 'POST':
         id = request.form['id']
         no = request.form['no']
-        conn = get_db_connection()
         tran.check_in(conn, id, no)
         conn.close()
         return redirect(url_for('transaction'))
-    return render_template('checkin.html')
+    
+    customers = cust.report_cust(conn)
+    all_rooms = room.report_room(conn)
+
+    # Get occupied rooms from the CUSTOMERS table
+    mycur = conn.cursor()
+    mycur.execute("SELECT Room FROM CUSTOMERS WHERE Room != '000'")
+    occupied_rooms_data = mycur.fetchall()
+    mycur.close()
+    occupied_room_numbers = [r[0] for r in occupied_rooms_data]
+
+    available_rooms = [r for r in all_rooms if r[0] not in occupied_room_numbers]
+
+    conn.close()
+    return render_template('checkin.html', customers=customers, available_rooms=available_rooms)
 
 @app.route('/transaction/checkout', methods=['GET', 'POST'])
 def checkout():
     if 'username' not in session:
         return redirect(url_for('index'))
 
+    conn = get_db_connection()
     if request.method == 'POST':
         id = request.form['id']
         no = request.form['no']
-        conn = get_db_connection()
         tran.check_out(conn, id, no)
         conn.close()
         return redirect(url_for('transaction'))
-    return render_template('checkout.html')
+    
+    # Fetch customers who are currently occupying a room
+    mycur = conn.cursor()
+    mycur.execute("SELECT CustomerID, Name, Room FROM CUSTOMERS WHERE Room != '000'")
+    occupied_customers = mycur.fetchall()
+    mycur.close()
+    conn.close()
+
+    return render_template('checkout.html', occupied_customers=occupied_customers)
 
 @app.route('/transaction/report')
 def transaction_report():

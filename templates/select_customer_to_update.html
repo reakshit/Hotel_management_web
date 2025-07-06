@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Customer</title>
+    <title>Select Customer to Update</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Delete Customer</h1>
+        <h1>Select Customer to Update</h1>
         <table>
             <thead>
                 <tr>
@@ -21,9 +21,8 @@
                     <td>{{ customer[0] }}</td>
                     <td>{{ customer[1] }}</td>
                     <td>
-                        <form action="/customer/delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ customer[1] }} ({{ customer[0] }})?');">
-                            <input type="hidden" name="cID" value="{{ customer[0] }}">
-                            <button type="submit">Delete</button>
+                        <form action="/customer/update/{{ customer[0] }}" method="get" style="display:inline;">
+                            <button type="submit">Update</button>
                         </form>
                     </td>
                 </tr>

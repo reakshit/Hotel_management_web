@@ -3,20 +3,38 @@
 <head>
     <title>Check-out</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function updateRoomField() {
+            var customerSelect = document.getElementById('id');
+            var roomField = document.getElementById('no');
+            var selectedCustomerRoom = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-room');
+            roomField.value = selectedCustomerRoom;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Check-out</h1>
         <form action="/transaction/checkout" method="post">
-            <label for="id">Customer ID</label>
-            <input type="text" id="id" name="id" required>
+            <label for="id">Customer</label>
+            <select id="id" name="id" onchange="updateRoomField()" required>
+                {% for customer in occupied_customers %}
+                <option value="{{ customer[0] }}" data-room="{{ customer[2] }}">{{ customer[0] }} - {{ customer[1] }} (Room: {{ customer[2] }})</option>
+                {% endfor %}
+            </select>
             <label for="no">Room No.</label>
-            <input type="text" id="no" name="no" required>
+            <input type="text" id="no" name="no" readonly required>
             <button type="submit">Check-out</button>
         </form>
         <form action="/transaction" method="get">
             <button type="submit">Back to Transaction Management</button>
         </form>
     </div>
+    <script>
+        // Initialize room field on page load if a customer is pre-selected
+        window.onload = function() {
+            updateRoomField();
+        };
+    </script>
 </body>
 </html>

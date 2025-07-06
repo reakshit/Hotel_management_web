@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Room</title>
+    <title>Select Room to Update</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Delete Room</h1>
+        <h1>Select Room to Update</h1>
         <table>
             <thead>
                 <tr>
@@ -23,9 +23,8 @@
                     <td>{{ room[1] }}</td>
                     <td>{{ room[2] }}</td>
                     <td>
-                        <form action="/room/delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete Room No. {{ room[0] }}?');">
-                            <input type="hidden" name="roomno" value="{{ room[0] }}">
-                            <button type="submit">Delete</button>
+                        <form action="/room/update/{{ room[0] }}" method="get" style="display:inline;">
+                            <button type="submit">Update</button>
                         </form>
                     </td>
                 </tr>

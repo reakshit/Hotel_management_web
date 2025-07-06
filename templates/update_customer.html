@@ -7,13 +7,11 @@
 <body>
     <div class="container">
         <h1>Update Customer</h1>
-        <form action="/customer/update" method="post">
-            <label for="tID">ID to Update</label>
-            <input type="text" id="tID" name="tID" required>
-            <label for="cID">Updated Customer ID</label>
-            <input type="text" id="cID" name="cID" required>
-            <label for="name">Updated Name</label>
-            <input type="text" id="name" name="name" required>
+        <form action="/customer/update/{{ customer[0] }}" method="post">
+            <label for="cID">Customer ID</label>
+            <input type="text" id="cID" name="cID" value="{{ customer[0] }}" required>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ customer[1] }}" required>
             <button type="submit">Update Customer</button>
         </form>
         <form action="/customer" method="get">
