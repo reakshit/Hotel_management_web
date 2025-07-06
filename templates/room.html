@@ -8,11 +8,31 @@
     <div class="container">
         <h1>Room Management</h1>
         <ul>
-            <li><a href="/room/new">Add new Room</a></li>
-            <li><a href="/room/update">Update existing Room</a></li>
-            <li><a href="/room/delete">Delete existing Room</a></li>
-            <li><a href="/room/report">Report</a></li>
-            <li><a href="/room">Back to Main Menu</a></li>
+            <li>
+                <form action="/room/new" method="get">
+                    <button type="submit">Add new Room</button>
+                </form>
+            </li>
+            <li>
+                <form action="/room/update" method="get">
+                    <button type="submit">Update existing Room</button>
+                </form>
+            </li>
+            <li>
+                <form action="/room/delete" method="get">
+                    <button type="submit">Delete existing Room</button>
+                </form>
+            </li>
+            <li>
+                <form action="/room/report" method="get">
+                    <button type="submit">Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/main_menu" method="get">
+                    <button type="submit">Back to Main Menu</button>
+                </form>
+            </li>
         </ul>
     </div>
 </body>

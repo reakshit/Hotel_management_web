@@ -8,10 +8,26 @@
     <div class="container">
         <h1>Report</h1>
         <ul>
-            <li><a href="/customer/report">Customer Report</a></li>
-            <li><a href="/room/report">Room Report</a></li>
-            <li><a href="/transaction/report">Transaction Report</a></li>
-            <li><a href="/main_menu">Back to Main Menu</a></li>
+            <li>
+                <form action="/customer/report" method="get">
+                    <button type="submit">Customer Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/room/report" method="get">
+                    <button type="submit">Room Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/transaction/report" method="get">
+                    <button type="submit">Transaction Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/main_menu" method="get">
+                    <button type="submit">Back to Main Menu</button>
+                </form>
+            </li>
         </ul>
     </div>
 </body>

@@ -8,11 +8,31 @@
     <div class="container">
         <h1>Main Menu</h1>
         <ul>
-            <li><a href="/room">Room Master</a></li>
-            <li><a href="/customer">Customer Master</a></li>
-            <li><a href="/transaction">Transaction</a></li>
-            <li><a href="/report">Report</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li>
+                <form action="/room" method="get">
+                    <button type="submit">Room Master</button>
+                </form>
+            </li>
+            <li>
+                <form action="/customer" method="get">
+                    <button type="submit">Customer Master</button>
+                </form>
+            </li>
+            <li>
+                <form action="/transaction" method="get">
+                    <button type="submit">Transaction</button>
+                </form>
+            </li>
+            <li>
+                <form action="/report" method="get">
+                    <button type="submit">Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/logout" method="get">
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 </body>

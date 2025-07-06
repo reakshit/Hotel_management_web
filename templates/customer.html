@@ -8,11 +8,31 @@
     <div class="container">
         <h1>Customer Management</h1>
         <ul>
-            <li><a href="/customer/new">Add new Customer</a></li>
-            <li><a href="/customer/update">Update existing Customer</a></li>
-            <li><a href="/customer/delete">Delete existing Customer</a></li>
-            <li><a href="/customer/report">Report</a></li>
-            <li><a href="/main_menu">Back to Main Menu</a></li>
+            <li>
+                <form action="/customer/new" method="get">
+                    <button type="submit">Add new Customer</button>
+                </form>
+            </li>
+            <li>
+                <form action="/customer/update" method="get">
+                    <button type="submit">Update existing Customer</button>
+                </form>
+            </li>
+            <li>
+                <form action="/customer/delete" method="get">
+                    <button type="submit">Delete existing Customer</button>
+                </form>
+            </li>
+            <li>
+                <form action="/customer/report" method="get">
+                    <button type="submit">Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/main_menu" method="get">
+                    <button type="submit">Back to Main Menu</button>
+                </form>
+            </li>
         </ul>
     </div>
 </body>

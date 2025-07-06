@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Add New User</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Login</h1>
-        <form action="/login" method="post">
+        <h1>Add New User</h1>
+        <form action="/admin/users/add" method="post">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
+            <button type="submit">Add User</button>
         </form>
-        
-        <form action="/admin_login" method="get">
-            <button type="submit">Admin Login</button>
+        <form action="/admin/users" method="get">
+            <button type="submit">Back to Manage Users</button>
         </form>
     </div>
 </body>

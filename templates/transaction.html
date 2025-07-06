@@ -8,10 +8,26 @@
     <div class="container">
         <h1>Transaction Management</h1>
         <ul>
-            <li><a href="/transaction/checkin">Room Check-in</a></li>
-            <li><a href="/transaction/checkout">Room Check-out</a></li>
-            <li><a href="/transaction/report">Report</a></li>
-            <li><a href="/main_menu">Back to Main Menu</a></li>
+            <li>
+                <form action="/transaction/checkin" method="get">
+                    <button type="submit">Room Check-in</button>
+                </form>
+            </li>
+            <li>
+                <form action="/transaction/checkout" method="get">
+                    <button type="submit">Room Check-out</button>
+                </form>
+            </li>
+            <li>
+                <form action="/transaction/report" method="get">
+                    <button type="submit">Report</button>
+                </form>
+            </li>
+            <li>
+                <form action="/main_menu" method="get">
+                    <button type="submit">Back to Main Menu</button>
+                </form>
+            </li>
         </ul>
     </div>
 </body>

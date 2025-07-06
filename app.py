@@ -40,6 +40,110 @@ def login():
                 return redirect(url_for('main_menu'))
     return 'Invalid username or password'
 
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == "admin" and password == "admin":
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return 'Invalid admin credentials'
+    return render_template('admin_login.html')
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    if 'admin_logged_in' in session and session['admin_logged_in']:
+        return render_template('admin_dashboard.html')
+    return redirect(url_for('admin_login'))
+
+def get_users():
+    users = []
+    try:
+        with open("userdat.txt", "r") as fobj:
+            for line in fobj:
+                username, encrypted_password = line.strip().split('/', 1)
+                users.append({'username': username, 'encrypted_password': encrypted_password})
+    except FileNotFoundError:
+        pass
+    return users
+
+@app.route('/admin/users')
+def admin_users():
+    if 'admin_logged_in' not in session or not session['admin_logged_in']:
+        return redirect(url_for('admin_login'))
+    users = get_users()
+    return render_template('admin_users.html', users=users)
+
+    return render_template('admin_users.html', users=users)
+
+@app.route('/admin/users/add', methods=['GET', 'POST'])
+def admin_add_user():
+    if 'admin_logged_in' not in session or not session['admin_logged_in']:
+        return redirect(url_for('admin_login'))
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        with open("userdat.txt", "a") as fobj:
+            data = "\n" + username + "/" + kryotos.kryptos(password)
+            fobj.write(data)
+        return redirect(url_for('admin_users'))
+    return render_template('admin_add_user.html')
+
+    return render_template('admin_add_user.html')
+
+@app.route('/admin/users/update/<username>', methods=['GET', 'POST'])
+def admin_update_user(username):
+    if 'admin_logged_in' not in session or not session['admin_logged_in']:
+        return redirect(url_for('admin_login'))
+
+    users = get_users()
+    user_to_update = next((user for user in users if user['username'] == username), None)
+
+    if not user_to_update:
+        return "User not found", 404
+
+    if request.method == 'POST':
+        new_username = request.form['username']
+        new_password = request.form['password']
+
+        updated_users = []
+        for user in users:
+            if user['username'] == username:
+                updated_users.append({'username': new_username, 'encrypted_password': kryotos.kryptos(new_password)})
+            else:
+                updated_users.append(user)
+
+        with open("userdat.txt", "w") as fobj:
+            for user in updated_users:
+                fobj.write(f"{user['username']}/{user['encrypted_password']}\n")
+        return redirect(url_for('admin_users'))
+
+    return render_template('admin_update_user.html', user=user_to_update)
+
+    return render_template('admin_update_user.html', user=user_to_update)
+
+@app.route('/admin/users/delete/<username>')
+def admin_delete_user(username):
+    if 'admin_logged_in' not in session or not session['admin_logged_in']:
+        return redirect(url_for('admin_login'))
+
+    users = get_users()
+    updated_users = [user for user in users if user['username'] != username]
+
+    with open("userdat.txt", "w") as fobj:
+        for user in updated_users:
+            fobj.write(f"{user['username']}/{user['encrypted_password']}\n")
+    return redirect(url_for('admin_users'))
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('admin_login'))
+
 @app.route('/new_user', methods=['GET', 'POST'])
 def new_user():
     if request.method == 'POST':

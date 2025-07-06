@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Update User: {{ user.username }}</h1>
+        <form action="/admin/users/update/{{ user.username }}" method="post">
+            <label for="username">New Username</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+            <label for="password">New Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password if changing">
+            <button type="submit">Update User</button>
+        </form>
+        <form action="/admin/users" method="get">
+            <button type="submit">Back to Manage Users</button>
+        </form>
+    </div>
+</body>
+</html>
