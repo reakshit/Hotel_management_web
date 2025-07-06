@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Main Menu</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block main_content %}
     <div class="container">
-        <h1>Main Menu</h1>
-        <ul>
-            <li>
-                <form action="/room" method="get">
-                    <button type="submit">Room Master</button>
-                </form>
-            </li>
-            <li>
-                <form action="/customer" method="get">
-                    <button type="submit">Customer Master</button>
-                </form>
-            </li>
-            <li>
-                <form action="/transaction" method="get">
-                    <button type="submit">Transaction</button>
-                </form>
-            </li>
-            <li>
-                <form action="/report" method="get">
-                    <button type="submit">Report</button>
-                </form>
-            </li>
-            <li>
-                <form action="/logout" method="get">
-                    <button type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
+        <h1>Welcome to the Hotel Management System!</h1>
+        <p>Use the navigation panel on the left to manage rooms, customers, transactions, and reports.</p>
     </div>
-</body>
-</html>
+{% endblock %}

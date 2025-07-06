@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Check-in</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Check-in{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Check-in</h1>
         <form action="/transaction/checkin" method="post">
@@ -22,9 +20,5 @@
             </select>
             <button type="submit">Check-in</button>
         </form>
-        <form action="/transaction" method="get">
-            <button type="submit">Back to Transaction Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

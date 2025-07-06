@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Select Room to Update</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Select Room to Update{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Select Room to Update</h1>
         <table>
@@ -31,9 +29,5 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/room" method="get">
-            <button type="submit">Back to Room Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Check-out</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script>
-        function updateRoomField() {
-            var customerSelect = document.getElementById('id');
-            var roomField = document.getElementById('no');
-            var selectedCustomerRoom = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-room');
-            roomField.value = selectedCustomerRoom;
-        }
-    </script>
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Check-out{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Check-out</h1>
         <form action="/transaction/checkout" method="post">
@@ -26,9 +16,6 @@
             <input type="text" id="no" name="no" readonly required>
             <button type="submit">Check-out</button>
         </form>
-        <form action="/transaction" method="get">
-            <button type="submit">Back to Transaction Management</button>
-        </form>
     </div>
     <script>
         // Initialize room field on page load if a customer is pre-selected
@@ -36,5 +23,4 @@
             updateRoomField();
         };
     </script>
-</body>
-</html>
+{% endblock %}

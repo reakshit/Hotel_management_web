@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>New Room</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Add New Room{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>New Room</h1>
         <form action="/room/new" method="post">
@@ -20,9 +18,5 @@
             <input type="text" id="roompri" name="roompri" required>
             <button type="submit">Add Room</button>
         </form>
-        <form action="/room" method="get">
-            <button type="submit">Back to Room Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

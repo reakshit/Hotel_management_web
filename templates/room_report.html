@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Room Report</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Room Report{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Room Report</h1>
         <table>
@@ -25,9 +23,5 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/room" method="get">
-            <button type="submit">Back to Room Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

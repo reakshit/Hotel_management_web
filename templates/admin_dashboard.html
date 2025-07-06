@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Admin Dashboard</h1>
-        <ul>
-            <li>
-                <form action="/admin/users" method="get">
-                    <button type="submit">Manage Users</button>
-                </form>
-            </li>
-            <li>
-                <form action="/admin/logout" method="get">
-                    <button type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
+        <form action="/admin/users" method="get">
+            <button type="submit">Manage Users</button>
+        </form>
     </div>
-</body>
-</html>
+{% endblock %}

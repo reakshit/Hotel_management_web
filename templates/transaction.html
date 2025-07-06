@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Transaction Management</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Transaction Management{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Transaction Management</h1>
         <ul>
@@ -23,12 +21,6 @@
                     <button type="submit">Report</button>
                 </form>
             </li>
-            <li>
-                <form action="/main_menu" method="get">
-                    <button type="submit">Back to Main Menu</button>
-                </form>
-            </li>
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}

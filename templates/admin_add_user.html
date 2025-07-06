@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add New User</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Add New User{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Add New User</h1>
         <form action="/admin/users/add" method="post">
@@ -14,9 +12,5 @@
             <input type="password" id="password" name="password" required>
             <button type="submit">Add User</button>
         </form>
-        <form action="/admin/users" method="get">
-            <button type="submit">Back to Manage Users</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

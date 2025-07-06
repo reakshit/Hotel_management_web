@@ -8,6 +8,10 @@ import transactions as tran
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with a real secret key
 
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+
 # Database connection
 def get_db_connection():
     connection = MDS.connect(

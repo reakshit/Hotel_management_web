@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Update Customer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Update Customer{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Update Customer</h1>
         <form action="/customer/update/{{ customer[0] }}" method="post">
@@ -14,9 +12,5 @@
             <input type="text" id="name" name="name" value="{{ customer[1] }}" required>
             <button type="submit">Update Customer</button>
         </form>
-        <form action="/customer" method="get">
-            <button type="submit">Back to Customer Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}

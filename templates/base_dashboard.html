@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Hotel Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="side-panel">
+            <h1>Menu</h1>
+            <ul>
+                <li>
+                    <form action="/main_menu" method="get">
+                        <button type="submit">Dashboard</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/room" method="get">
+                        <button type="submit">Room Master</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/customer" method="get">
+                        <button type="submit">Customer Master</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/transaction" method="get">
+                        <button type="submit">Transaction</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/report" method="get">
+                        <button type="submit">Report</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/logout" method="get">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+                {% if session.admin_logged_in %}
+                <li>
+                    <form action="/admin_dashboard" method="get">
+                        <button type="submit">Admin Dashboard</button>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <main class="main-content">
+            {% block main_content %}
+            <!-- Content for specific pages will be injected here -->
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>

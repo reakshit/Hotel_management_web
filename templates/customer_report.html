@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Customer Report</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base_dashboard.html" %}
+
+{% block title %}Customer Report{% endblock %}
+
+{% block main_content %}
     <div class="container">
         <h1>Customer Report</h1>
         <table>
@@ -25,9 +23,5 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/customer" method="get">
-            <button type="submit">Back to Customer Management</button>
-        </form>
     </div>
-</body>
-</html>
+{% endblock %}
