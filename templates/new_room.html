@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>New Room</h1>
+        <form action="/room/new" method="post">
+            <label for="roomno">Room No.</label>
+            <input type="text" id="roomno" name="roomno" required>
+            <label for="roontype">Room Type</label>
+            <input type="text" id="roontype" name="roontype" required>
+            <label for="roompri">Room Price</label>
+            <input type="text" id="roompri" name="roompri" required>
+            <button type="submit">Add Room</button>
+        </form>
+        <a href="/room">Back to Room Management</a>
+    </div>
+</body>
+</html>

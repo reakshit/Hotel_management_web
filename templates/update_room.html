@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Room</h1>
+        <form action="/room/update" method="post">
+            <label for="uroom">Room to Update</label>
+            <input type="text" id="uroom" name="uroom" required>
+            <label for="roomno">Updated Room No.</label>
+            <input type="text" id="roomno" name="roomno" required>
+            <label for="roontype">Updated Room Type</label>
+            <input type="text" id="roontype" name="roontype" required>
+            <label for="roompri">Updated Room Price</label>
+            <input type="text" id="roompri" name="roompri" required>
+            <button type="submit">Update Room</button>
+        </form>
+        <a href="/room">Back to Room Management</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Transaction Report</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Room No.</th>
+                    <th>Is Occupied</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/transaction">Back to Transaction Management</a>
+    </div>
+</body>
+</html>

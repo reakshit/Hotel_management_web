@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Room</h1>
+        <form action="/room/delete" method="post">
+            <label for="roomno">Room No. to Delete</label>
+            <input type="text" id="roomno" name="roomno" required>
+            <button type="submit">Delete Room</button>
+        </form>
+        <a href="/room">Back to Room Management</a>
+    </div>
+</body>
+</html>

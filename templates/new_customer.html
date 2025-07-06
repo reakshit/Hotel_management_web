@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Customer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>New Customer</h1>
+        <form action="/customer/new" method="post">
+            <label for="cID">Customer ID</label>
+            <input type="text" id="cID" name="cID" required>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            <button type="submit">Add Customer</button>
+        </form>
+        <a href="/customer">Back to Customer Management</a>
+    </div>
+</body>
+</html>
