@@ -122,7 +122,7 @@ def customer_report():
     return render_template('customer_report.html', records=records)
 
 @app.route('/room')
-def room():
+def room_management():
     if 'username' in session:
         return render_template('room.html')
     return redirect(url_for('index'))
@@ -139,7 +139,7 @@ def new_room():
         conn = get_db_connection()
         room.add_room(conn, roomno, roontype, roompri)
         conn.close()
-        return redirect(url_for('room'))
+        return redirect(url_for('room_management'))
     return render_template('new_room.html')
 
 @app.route('/room/update', methods=['GET', 'POST'])
@@ -155,7 +155,7 @@ def update_room():
         conn = get_db_connection()
         room.update_rooom(conn, uroom, roomno, roontype, roompri)
         conn.close()
-        return redirect(url_for('room'))
+        return redirect(url_for('room_management'))
     return render_template('update_room.html')
 
 @app.route('/room/delete', methods=['GET', 'POST'])
@@ -168,7 +168,7 @@ def delete_room():
         conn = get_db_connection()
         room.delete_room(conn, roomno)
         conn.close()
-        return redirect(url_for('room'))
+        return redirect(url_for('room_management'))
     return render_template('delete_room.html')
 
 @app.route('/room/report')
@@ -179,7 +179,6 @@ def room_report():
     conn = get_db_connection()
     records = room.report_room(conn)
     conn.close()
-    print("Room Report Records:", records) # Debugging line
     return render_template('room_report.html', records=records)
 
 @app.route('/transaction')
