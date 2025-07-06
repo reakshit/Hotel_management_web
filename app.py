@@ -41,6 +41,7 @@ def login():
             tpass = kryotos.kryptos(password)
             if a[2] == tpass:
                 session['username'] = username
+                session['admin_logged_in'] = False # Ensure admin status is false for regular users
                 return redirect(url_for('main_menu'))
     return 'Invalid username or password'
 
@@ -163,6 +164,7 @@ def new_user():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
+    session.pop('admin_logged_in', None) # Clear admin status on regular logout
     return redirect(url_for('index'))
 
 @app.route('/main_menu')
