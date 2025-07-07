@@ -1,31 +1,15 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Customer Management - HotelFlow{% endblock %}
 
-{% block title %}Customer Management{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Customer Management</h1>
-        <ul>
-            <li>
-                <form action="/customer/new" method="get">
-                    <button type="submit">Add new Customer</button>
-                </form>
-            </li>
-            <li>
-                <form action="/customer/update" method="get">
-                    <button type="submit">Update existing Customer</button>
-                </form>
-            </li>
-            <li>
-                <form action="/customer/delete" method="get">
-                    <button type="submit">Delete existing Customer</button>
-                </form>
-            </li>
-            <li>
-                <form action="/customer/report" method="get">
-                    <button type="submit">Report</button>
-                </form>
-            </li>
-        </ul>
+{% block content %}
+<div class="content-card">
+    <h1>Customer Management</h1>
+    <div class="card-actions">
+        <a href="{{ url_for('new_customer') }}" class="btn btn-primary"><i class="fas fa-plus"></i>Add new Customer</a>
+        <a href="{{ url_for('select_customer_to_update') }}" class="btn btn-secondary"><i class="fas fa-edit"></i>Update existing Customer</a>
+        <a href="{{ url_for('delete_customer') }}" class="btn btn-secondary"><i class="fas fa-trash"></i>Delete existing Customer</a>
+        <a href="{{ url_for('customer_report') }}" class="btn btn-secondary"><i class="fas fa-file-alt"></i>Report</a>
     </div>
+</div>
 {% endblock %}

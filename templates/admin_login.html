@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - HotelFlow</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .login-container {
+            background-image: url('{{ url_for('static', filename='login_background.png') }}');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: 1;
+        }
+        .login-card {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(31, 40, 62, 0.9); /* Slightly transparent dark card */
+            border: 1px solid var(--border-color);
+        }
+        .login-card h1 {
+            color: var(--primary-color);
+        }
+        .login-card .form-group label {
+            color: var(--text-color);
+        }
+        .login-card .form-group input {
+            background-color: var(--light-grey);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+        .login-card .btn-secondary {
+            background-color: var(--light-grey);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+        .login-card .btn-secondary:hover {
+            background-color: #3A4750;
+            border-color: #4F5D6B;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Login</h1>
-        <form action="/admin_login" method="post">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
-        </form>
-        <form action="/" method="get">
-            <button type="submit">Back to User Login</button>
-        </form>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">HotelFlow</div>
+            <h1>Administrator Login</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form method="POST" action="{{ url_for('admin_login') }}" class="form-container">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </div>
+            </form>
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary" style="width: 100%;">Back to Staff Login</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -1,26 +1,14 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Reports - HotelFlow{% endblock %}
 
-{% block title %}Reports{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Reports</h1>
-        <ul>
-            <li>
-                <form action="/customer/report" method="get">
-                    <button type="submit">Customer Report</button>
-                </form>
-            </li>
-            <li>
-                <form action="/room/report" method="get">
-                    <button type="submit">Room Report</button>
-                </form>
-            </li>
-            <li>
-                <form action="/transaction/report" method="get">
-                    <button type="submit">Transaction Report</button>
-                </form>
-            </li>
-        </ul>
+{% block content %}
+<div class="content-card">
+    <h1>Reports</h1>
+    <div class="card-actions">
+        <a href="{{ url_for('customer_report') }}" class="btn btn-secondary"><i class="fas fa-users"></i>Customer Report</a>
+        <a href="{{ url_for('room_report') }}" class="btn btn-secondary"><i class="fas fa-bed"></i>Room Report</a>
+        <a href="{{ url_for('transaction_report') }}" class="btn btn-secondary"><i class="fas fa-exchange-alt"></i>Transaction Report</a>
     </div>
+</div>
 {% endblock %}

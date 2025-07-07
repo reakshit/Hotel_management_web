@@ -1,24 +1,31 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Check-In - HotelFlow{% endblock %}
 
-{% block title %}Check-in{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Check-in</h1>
-        <form action="/transaction/checkin" method="post">
+{% block content %}
+<div class="content-card">
+    <h1>Check-In</h1>
+    <form method="POST" action="{{ url_for('checkin') }}" class="form-container">
+        <div class="form-group">
             <label for="id">Customer</label>
             <select id="id" name="id" required>
                 {% for customer in customers %}
-                <option value="{{ customer[0] }}">{{ customer[0] }} - {{ customer[1] }}</option>
+                <option value="{{ customer[0] }}">{{ customer[1] }}</option>
                 {% endfor %}
             </select>
-            <label for="no">Available Room</label>
+        </div>
+        <div class="form-group">
+            <label for="no">Room</label>
             <select id="no" name="no" required>
                 {% for room in available_rooms %}
-                <option value="{{ room[0] }}">{{ room[0] }} ({{ room[1] }} - ${{ room[2] }})</option>
+                <option value="{{ room[0] }}">{{ room[0] }} - {{ room[1] }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Check-in</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <a href="{{ url_for('transaction') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Check-In</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

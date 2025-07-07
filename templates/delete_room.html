@@ -1,34 +1,34 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Delete Room - HotelFlow{% endblock %}
 
-{% block title %}Delete Room{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Delete Room</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Room No.</th>
-                    <th>Room Type</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for room in rooms %}
-                <tr>
-                    <td>{{ room[0] }}</td>
-                    <td>{{ room[1] }}</td>
-                    <td>{{ room[2] }}</td>
-                    <td>
-                        <form action="/room/delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete Room No. {{ room[0] }}?');">
-                            <input type="hidden" name="roomno" value="{{ room[0] }}">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+{% block content %}
+<div class="content-card content-card-lg">
+    <h1>Delete Room</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Rate</th>
+                <th style="width: 120px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room[0] }}</td>
+                <td>{{ room[1] }}</td>
+                <td>{{ room[2] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_room') }}" style="display:inline;">
+                        <input type="hidden" name="roomno" value="{{ room[0] }}">
+                        <button type="submit" class="btn btn-primary btn-small">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

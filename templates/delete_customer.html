@@ -1,32 +1,32 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Delete Customer - HotelFlow{% endblock %}
 
-{% block title %}Delete Customer{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Delete Customer</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for customer in customers %}
-                <tr>
-                    <td>{{ customer[0] }}</td>
-                    <td>{{ customer[1] }}</td>
-                    <td>
-                        <form action="/customer/delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete {{ customer[1] }} ({{ customer[0] }})?');">
-                            <input type="hidden" name="cID" value="{{ customer[0] }}">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+{% block content %}
+<div class="content-card content-card-lg">
+    <h1>Delete Customer</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th style="width: 120px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer[0] }}</td>
+                <td>{{ customer[1] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_customer') }}" style="display:inline;">
+                        <input type="hidden" name="cID" value="{{ customer[0] }}">
+                        <button type="submit" class="btn btn-primary btn-small">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

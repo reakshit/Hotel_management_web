@@ -1,26 +1,14 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Transaction Management - HotelFlow{% endblock %}
 
-{% block title %}Transaction Management{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Transaction Management</h1>
-        <ul>
-            <li>
-                <form action="/transaction/checkin" method="get">
-                    <button type="submit">Room Check-in</button>
-                </form>
-            </li>
-            <li>
-                <form action="/transaction/checkout" method="get">
-                    <button type="submit">Room Check-out</button>
-                </form>
-            </li>
-            <li>
-                <form action="/transaction/report" method="get">
-                    <button type="submit">Report</button>
-                </form>
-            </li>
-        </ul>
+{% block content %}
+<div class="content-card">
+    <h1>Transaction Management</h1>
+    <div class="card-actions">
+        <a href="{{ url_for('checkin') }}" class="btn btn-primary"><i class="fas fa-calendar-check"></i>Check-In</a>
+        <a href="{{ url_for('checkout') }}" class="btn btn-secondary"><i class="fas fa-calendar-times"></i>Check-Out</a>
+        <a href="{{ url_for('transaction_report') }}" class="btn btn-secondary"><i class="fas fa-file-alt"></i>Report</a>
     </div>
+</div>
 {% endblock %}

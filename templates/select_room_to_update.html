@@ -1,33 +1,31 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Select Room to Update - HotelFlow{% endblock %}
 
-{% block title %}Select Room to Update{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Select Room to Update</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Room No.</th>
-                    <th>Room Type</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for room in rooms %}
-                <tr>
-                    <td>{{ room[0] }}</td>
-                    <td>{{ room[1] }}</td>
-                    <td>{{ room[2] }}</td>
-                    <td>
-                        <form action="/room/update/{{ room[0] }}" method="get" style="display:inline;">
-                            <button type="submit">Update</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+{% block content %}
+<div class="content-card content-card-lg">
+    <h1>Select Room to Update</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Rate</th>
+                <th style="width: 120px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room[0] }}</td>
+                <td>{{ room[1] }}</td>
+                <td>{{ room[2] }}</td>
+                <td>
+                    <a href="{{ url_for('update_room', roomno=room[0]) }}" class="btn btn-primary btn-small">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

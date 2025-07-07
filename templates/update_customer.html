@@ -1,16 +1,23 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Update Customer - HotelFlow{% endblock %}
 
-{% block title %}Update Customer{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Update Customer</h1>
-        <form action="/customer/update/{{ customer[0] }}" method="post">
+{% block content %}
+<div class="content-card">
+    <h1>Update Customer</h1>
+    <form method="POST" action="{{ url_for('update_customer', cID=customer[0]) }}" class="form-container">
+        <div class="form-group">
             <label for="cID">Customer ID</label>
             <input type="text" id="cID" name="cID" value="{{ customer[0] }}" required>
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" value="{{ customer[1] }}" required>
-            <button type="submit">Update Customer</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <a href="{{ url_for('select_customer_to_update') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update Customer</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

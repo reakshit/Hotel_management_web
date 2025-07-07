@@ -1,22 +1,27 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Update Room - HotelFlow{% endblock %}
 
-{% block title %}Update Room{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Update Room</h1>
-        <form action="/room/update/{{ room[0] }}" method="post">
-            <label for="roomno">Room No.</label>
+{% block content %}
+<div class="content-card">
+    <h1>Update Room</h1>
+    <form method="POST" action="{{ url_for('update_room', roomno=room[0]) }}" class="form-container">
+        <div class="form-group">
+            <label for="roomno">Room Number</label>
             <input type="text" id="roomno" name="roomno" value="{{ room[0] }}" required>
+        </div>
+        <div class="form-group">
             <label for="roontype">Room Type</label>
-            <select id="roontype" name="roontype" required>
-                <option value="Standard" {% if room[1] == "Standard" %}selected{% endif %}>Standard</option>
-                <option value="Deluxe" {% if room[1] == "Deluxe" %}selected{% endif %}>Deluxe</option>
-                <option value="Suite" {% if room[1] == "Suite" %}selected{% endif %}>Suite</option>
-            </select>
-            <label for="roompri">Room Price</label>
+            <input type="text" id="roontype" name="roontype" value="{{ room[1] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="roompri">Rate</label>
             <input type="text" id="roompri" name="roompri" value="{{ room[2] }}" required>
-            <button type="submit">Update Room</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <a href="{{ url_for('select_room_to_update') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update Room</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

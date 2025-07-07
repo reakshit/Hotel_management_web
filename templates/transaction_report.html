@@ -1,29 +1,29 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Transaction Report - HotelFlow{% endblock %}
 
-{% block title %}Transaction Report{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Transaction Report</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Room No.</th>
-                    <th>Is Occupied</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for record in records %}
-                <tr>
-                    <td>{{ record[0] }}</td>
-                    <td>{{ record[1] }}</td>
-                    <td>{{ record[2] }}</td>
-                    <td>{{ record[3] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+{% block content %}
+<div class="content-card content-card-lg">
+    <h1>Transaction Report</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Room Number</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in records %}
+            <tr>
+                <td>{{ transaction[0] }}</td>
+                <td>{{ transaction[1] }}</td>
+                <td>{{ transaction[2] }}</td>
+                <td>{{ transaction[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

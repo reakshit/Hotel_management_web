@@ -1,26 +1,23 @@
+
 {% extends "base_dashboard.html" %}
+{% block title %}Check-Out - HotelFlow{% endblock %}
 
-{% block title %}Check-out{% endblock %}
-
-{% block main_content %}
-    <div class="container">
-        <h1>Check-out</h1>
-        <form action="/transaction/checkout" method="post">
-            <label for="id">Customer</label>
-            <select id="id" name="id" onchange="updateRoomField()" required>
+{% block content %}
+<div class="content-card">
+    <h1>Check-Out</h1>
+    <form method="POST" action="{{ url_for('checkout') }}" class="form-container">
+        <div class="form-group">
+            <label for="id">Select Customer to Check-Out</label>
+            <select id="id" name="id" required>
                 {% for customer in occupied_customers %}
-                <option value="{{ customer[0] }}" data-room="{{ customer[2] }}">{{ customer[0] }} - {{ customer[1] }} (Room: {{ customer[2] }})</option>
+                <option value="{{ customer[0] }}">Customer: {{ customer[1] }} - Room: {{ customer[2] }}</option>
                 {% endfor %}
             </select>
-            <label for="no">Room No.</label>
-            <input type="text" id="no" name="no" readonly required>
-            <button type="submit">Check-out</button>
-        </form>
-    </div>
-    <script>
-        // Initialize room field on page load if a customer is pre-selected
-        window.onload = function() {
-            updateRoomField();
-        };
-    </script>
+        </div>
+        <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <a href="{{ url_for('transaction') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Check-Out</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
