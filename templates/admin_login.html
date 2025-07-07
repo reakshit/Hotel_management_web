@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - HotelFlow</title>
+    <title>Admin Login - HotelMang</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         .login-container {
@@ -53,7 +53,7 @@
 <body>
     <div class="login-container">
         <div class="login-card">
-            <div class="logo">HotelFlow</div>
+            <div class="logo">HotelMang</div>
             <h1>Administrator Login</h1>
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
